@@ -1,65 +1,64 @@
-CREATE SCHEMA `afs`;
 
 CREATE TABLE `afs`.`scentity` (
-  `id` int PRIMARY KEY,
+  `id` varchar(20) PRIMARY KEY,
   `merchant_name` varchar(30),
   `mobile` varchar(15),
   `email` varchar(50),
   `address` varchar(40),
-  `created at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `status` int,
   `due_ammount` float,
   `gst` varchar(255),
-  `created_by` varchar(10)
+  `uid` varchar(10)
 );
 
 CREATE TABLE `afs`.`sdentity` (
-  `id` int PRIMARY KEY,
+  `id` varchar(20) PRIMARY KEY,
   `merchant_name` varchar(30),
   `mobile` varchar(15),
   `email` varchar(50),
   `address` varchar(40),
-  `created at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `status` int,
   `due_ammount` float,
   `gst` varchar(17),
-  `created_by` varchar(10)
+  `uid` varchar(10)
 );
 
 CREATE TABLE `afs`.`product_main` (
-  `id` int PRIMARY KEY,
+  `id` varchar(20) PRIMARY KEY,
   `name` varchar(50),
-  `created at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `unit` varchar(255),
   `current_stock` float,
   `status` int
 );
 
 CREATE TABLE `afs`.`product_sub` (
-  `id` int PRIMARY KEY,
-  `main_prod` varchar(5),
+  `id` varchar(20) PRIMARY KEY,
+  `main_prod` varchar(20),
   `name` varchar(50),
-  `created at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `current_stock` float,
   `status` int
 );
 
 CREATE TABLE `afs`.`product_entry_main` (
-  `id` int PRIMARY KEY,
+  `id` varchar(20) PRIMARY KEY,
   `chalan_no` varchar(255),
   `from` varchar(20),
   `recived_date` date,
   `delivary_mode` varchar(10),
-  `created at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `total_amount` float,
   `remarks` varchar(100),
-  `created_by` varchar(10)
+  `uid` varchar(10)
 );
 
 CREATE TABLE `afs`.`product_entry_history` (
-  `id` int,
-  `entry_id` int,
-  `created at` timestamp,
+  `id` varchar(20),
+  `entry_id` varchar(20),
+  `created_at` timestamp DEFAULT (now()),
   `product` varchar(20),
   `qty` float,
   `amount` float,
@@ -68,17 +67,17 @@ CREATE TABLE `afs`.`product_entry_history` (
 );
 
 CREATE TABLE `afs`.`secuence` (
-  `id` int PRIMARY KEY,
+  `id` varchar(20) PRIMARY KEY,
   `type` varchar(20),
   `head` varchar(20),
   `sno` varchar(20),
   `remarks` varchar(40),
   `status` bool,
-  `created at` timestamp
+  `created_at` timestamp DEFAULT (now())
 );
 
 CREATE TABLE `afs`.`appinfo` (
-  `id` int,
+  `id` varchar(20),
   `name` varchar(50),
   `logo` varchar(100),
   `address` varchar(100),
@@ -86,7 +85,7 @@ CREATE TABLE `afs`.`appinfo` (
 );
 
 CREATE TABLE `afs`.`appuser` (
-  `id` int,
+  `uid` varchar(20) PRIMARY KEY,
   `name` varchar(50),
   `mobile` varchar(15),
   `email` varchar(50),
@@ -100,20 +99,20 @@ CREATE TABLE `afs`.`appuser` (
 );
 
 CREATE TABLE `afs`.`product_delivary_main` (
-  `id` int PRIMARY KEY,
+  `id` varchar(20) PRIMARY KEY,
   `chalan_no` varchar(50),
   `to` varchar(20),
   `delivary_date` date,
   `delivary_mode` varchar(10),
-  `created_at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `total_amount` float,
   `remarks` varchar(100),
-  `created_by` varchar(10)
+  `uid` varchar(10)
 );
 
 CREATE TABLE `afs`.`product_delivery_history` (
-  `id` int,
-  `entry_id` int,
+  `id` varchar(20),
+  `entry_id` varchar(20),
   `created_at` timestamp,
   `product` varchar(10),
   `qty` float,
@@ -123,49 +122,49 @@ CREATE TABLE `afs`.`product_delivery_history` (
 );
 
 CREATE TABLE `afs`.`sc_payment_entry` (
-  `id` int PRIMARY KEY,
-  `scid` int,
+  `id` varchar(20) PRIMARY KEY,
+  `scid` varchar(20),
   `created_at` timestamp,
   `amount` float,
   `mode` varchar(10),
   `hisamount` float,
   `curamount` float,
   `remarks` varchar(100),
-  `created_by` varchar(10)
+  `uid` varchar(10)
 );
 
 CREATE TABLE `afs`.`sd_payment_entry` (
-  `id` int PRIMARY KEY,
-  `sdid` int,
+  `id` varchar(20) PRIMARY KEY,
+  `sdid` varchar(20),
   `created_at` timestamp,
   `amount` float,
   `mode` varchar(10),
   `hisamount` float,
   `curamount` float,
   `remarks` varchar(100),
-  `created_by` varchar(10)
+  `uid` varchar(10)
 );
 
 CREATE TABLE `afs`.`invoice_gst_main` (
-  `id` int PRIMARY KEY,
+  `id` varchar(20) PRIMARY KEY,
   `invoice_no` varchar(30),
   `to` varchar(20),
-  `gst` varbinary,
+  `gst` varchar(20),
   `inovice_date` date,
   `gross_amount` float,
   `cgst_amount` float,
   `ssgst_amount` float,
   `total_amount` float,
   `remarks` varchar(100),
-  `created_at` timestamp,
-  `created_by` varchar(10),
+  `created_at` timestamp DEFAULT (now()),
+  `uid` varchar(10),
   `paid` bool
 );
 
 CREATE TABLE `afs`.`invoice_gst_history` (
-  `id` int,
-  `entry_id` int,
-  `created at` timestamp,
+  `id` varchar(20),
+  `entry_id` varchar(20),
+  `created_at` timestamp DEFAULT (now()),
   `product` varchar(255),
   `qty` float,
   `HSN` varchar(8),
@@ -178,8 +177,8 @@ CREATE TABLE `afs`.`invoice_gst_history` (
 );
 
 CREATE TABLE `afs`.`leadger_sc` (
-  `id` int PRIMARY KEY,
-  `name` varchar(50),
+  `id` varchar(20) PRIMARY KEY,
+  `scid` varchar(20),
   `date` date,
   `type` varchar(20),
   `current_amomount` float,
@@ -187,13 +186,13 @@ CREATE TABLE `afs`.`leadger_sc` (
   `mode` varchar(10),
   `remarks` varchar(50),
   `refno` varchar(50),
-  `created at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `created by` varchar(20)
 );
 
 CREATE TABLE `afs`.`leadger_sd` (
-  `id` int PRIMARY KEY,
-  `name` varchar(50),
+  `id` varchar(20) PRIMARY KEY,
+  `sdid` varchar(20),
   `date` date,
   `type` varchar(20),
   `current_amomount` float,
@@ -201,48 +200,52 @@ CREATE TABLE `afs`.`leadger_sd` (
   `mode` varchar(10),
   `remarks` varchar(50),
   `refno` varchar(50),
-  `created at` timestamp,
+  `created_at` timestamp DEFAULT (now()),
   `created by` varchar(20)
 );
 
-ALTER TABLE `afs`.`product_main` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`product_sub` (`main_prod`);
+ALTER TABLE `afs`.`scentity` ADD FOREIGN KEY (`uid`) REFERENCES `afs`.`appuser` (`uid`);
 
-ALTER TABLE `afs`.`product_entry_history` ADD FOREIGN KEY (`product`) REFERENCES `afs`.`product_sub` (`id`);
+ALTER TABLE `afs`.`sdentity` ADD FOREIGN KEY (`uid`) REFERENCES `afs`.`appuser` (`uid`);
 
-ALTER TABLE `afs`.`product_entry_main` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`product_entry_history` (`entry_id`);
+ALTER TABLE `afs`.`product_entry_main` ADD FOREIGN KEY (`uid`) REFERENCES `afs`.`appuser` (`uid`);
+
+ALTER TABLE `afs`.`sd_payment_entry` ADD FOREIGN KEY (`uid`) REFERENCES `afs`.`appuser` (`uid`);
+
+ALTER TABLE `afs`.`product_delivary_main` ADD FOREIGN KEY (`uid`) REFERENCES `afs`.`appuser` (`uid`);
+
+ALTER TABLE `afs`.`sc_payment_entry` ADD FOREIGN KEY (`uid`) REFERENCES `afs`.`appuser` (`uid`);
+
+ALTER TABLE `afs`.`invoice_gst_main` ADD FOREIGN KEY (`uid`) REFERENCES `afs`.`appuser` (`uid`);
+
+ALTER TABLE `afs`.`leadger_sc` ADD FOREIGN KEY (`created by`) REFERENCES `afs`.`appuser` (`uid`);
+
+ALTER TABLE `afs`.`leadger_sd` ADD FOREIGN KEY (`created by`) REFERENCES `afs`.`appuser` (`uid`);
 
 ALTER TABLE `afs`.`product_entry_main` ADD FOREIGN KEY (`from`) REFERENCES `afs`.`scentity` (`id`);
 
-ALTER TABLE `afs`.`product_entry_main` ADD FOREIGN KEY (`created_by`) REFERENCES `afs`.`appuser` (`id`);
-
-ALTER TABLE `afs`.`product_delivary_main` ADD FOREIGN KEY (`to`) REFERENCES `afs`.`sdentity` (`id`);
+ALTER TABLE `afs`.`product_entry_history` ADD FOREIGN KEY (`entry_id`) REFERENCES `afs`.`product_entry_main` (`id`);
 
 ALTER TABLE `afs`.`product_delivery_history` ADD FOREIGN KEY (`entry_id`) REFERENCES `afs`.`product_delivary_main` (`id`);
 
-ALTER TABLE `afs`.`scentity` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sc_payment_entry` (`scid`);
+ALTER TABLE `afs`.`product_delivary_main` ADD FOREIGN KEY (`to`) REFERENCES `afs`.`sdentity` (`id`);
 
-ALTER TABLE `afs`.`sdentity` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sd_payment_entry` (`id`);
+ALTER TABLE `afs`.`leadger_sc` ADD FOREIGN KEY (`scid`) REFERENCES `afs`.`scentity` (`id`);
 
-ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sd_payment_entry` (`created_by`);
+ALTER TABLE `afs`.`leadger_sd` ADD FOREIGN KEY (`sdid`) REFERENCES `afs`.`sdentity` (`id`);
 
-ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sc_payment_entry` (`created_by`);
+ALTER TABLE `afs`.`sc_payment_entry` ADD FOREIGN KEY (`scid`) REFERENCES `afs`.`scentity` (`id`);
 
-ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`scentity` (`created_by`);
+ALTER TABLE `afs`.`sd_payment_entry` ADD FOREIGN KEY (`sdid`) REFERENCES `afs`.`sdentity` (`id`);
 
-ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sdentity` (`created_by`);
+ALTER TABLE `afs`.`product_sub` ADD FOREIGN KEY (`main_prod`) REFERENCES `afs`.`product_main` (`id`);
+
+ALTER TABLE `afs`.`product_entry_history` ADD FOREIGN KEY (`product`) REFERENCES `afs`.`product_sub` (`id`);
 
 ALTER TABLE `afs`.`invoice_gst_history` ADD FOREIGN KEY (`entry_id`) REFERENCES `afs`.`invoice_gst_main` (`id`);
 
-ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`invoice_gst_main` (`created_by`);
+ALTER TABLE `afs`.`invoice_gst_history` ADD FOREIGN KEY (`product`) REFERENCES `afs`.`product_sub` (`id`);
 
-ALTER TABLE `afs`.`sd_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`invoice_gst_main` (`to`);
+ALTER TABLE `afs`.`product_delivery_history` ADD FOREIGN KEY (`product`) REFERENCES `afs`.`product_sub` (`id`);
 
-ALTER TABLE `afs`.`product_sub` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`invoice_gst_history` (`product`);
-
-ALTER TABLE `afs`.`sc_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sc` (`name`);
-
-ALTER TABLE `afs`.`sd_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sd` (`name`);
-
-ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sd` (`created by`);
-
-ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sc` (`created by`);
+ALTER TABLE `afs`.`invoice_gst_main` ADD FOREIGN KEY (`to`) REFERENCES `afs`.`sdentity` (`id`);

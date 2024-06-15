@@ -1,61 +1,64 @@
-Table "afs "."scentity" {
-  "id" int [pk]
+
+Table "afs"."scentity" {
+  "id" varchar(20) [pk]
   "merchant_name" varchar(30)
   "mobile" varchar(15)
   "email" varchar(50)
   "address" varchar(40)
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
   "status" int
   "due_ammount" float
   "gst" varchar(255)
-  "created_by" varchar(10)
+  "uid" varchar(10)
 }
 
-Table "afs "."sdentity" {
-  "id" int [pk]
+Table "afs"."sdentity" {
+  "id" varchar(20) [pk]
   "merchant_name" varchar(30)
   "mobile" varchar(15)
   "email" varchar(50)
   "address" varchar(40)
-
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
   "status" int
   "due_ammount" float
   "gst" varchar(17)
-  "created_by" varchar(10)
+  "uid" varchar(10)
 }
-Table "afs "."product_main" {
-  "id" int [pk]
+
+Table "afs"."product_main" {
+  "id" varchar(20) [pk]
   "name" varchar(50)
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
   "unit" varchar(255)
   "current_stock" float
   "status" int
 }
-Table "afs "."product_sub" {
-  "id" int [pk]
-  "main_prod" varchar(5)
+
+Table "afs"."product_sub" {
+  "id" varchar(20) [pk]
+  "main_prod" varchar(20)
   "name" varchar(50)
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
   "current_stock" float
   "status" int
 }
-Table "afs "."product_entry_main" {
-  "id" int [pk]
-  "chalan_no" varchar
+
+Table "afs"."product_entry_main" {
+  "id" varchar(20) [pk]
+  "chalan_no" varchar(255)
   "from" varchar(20)
   "recived_date" date
   "delivary_mode" varchar(10)
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
   "total_amount" float
   "remarks" varchar(100)
-  "created_by" varchar(10)
+  "uid" varchar(10)
 }
 
-Table "afs "."product_entry_history" {
-  "id" int
-  "entry_id" int
-  "created at" timestamp
+Table "afs"."product_entry_history" {
+  "id" varchar(20)
+  "entry_id" varchar(20)
+  "created_at" timestamp [default: `now()`]
   "product" varchar(20)
   "qty" float
   "amount" float
@@ -65,26 +68,27 @@ Table "afs "."product_entry_history" {
     (id, entry_id) [pk]
   }
 }
-Table "afs "."secuence" {
-  "id" int [pk]
+
+Table "afs"."secuence" {
+  "id" varchar(20) [pk]
   "type" varchar(20)
   "head" varchar(20)
   "sno" varchar(20)
   "remarks" varchar(40)
   "status" bool
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
 }
 
-Table "afs "."appinfo" {
-  "id" int
+Table "afs"."appinfo" {
+  "id" varchar(20)
   "name" varchar(50)
   "logo" varchar(100)
   "address" varchar(100)
   "gstno" varchar(17)
 }
 
-Table "afs "."appuser" {
-  "id" int
+Table "afs"."appuser" {
+  "uid" varchar(20) [pk]
   "name" varchar(50)
   "mobile" varchar(15)
   "email" varchar(50)
@@ -96,21 +100,22 @@ Table "afs "."appuser" {
   "lastlogin_time" timestamp
   "lastlogin_from" varchar(30)
 }
-Table "afs "."product_delivary_main" {
-  "id" int [pk]
+
+Table "afs"."product_delivary_main" {
+  "id" varchar(20) [pk]
   "chalan_no" varchar(50)
   "to" varchar(20)
   "delivary_date" date
   "delivary_mode" varchar(10)
-  "created_at" timestamp
+  "created_at" timestamp [default: `now()`]
   "total_amount" float
   "remarks" varchar(100)
-  "created_by" varchar(10)
+  "uid" varchar(10)
 }
 
-Table "afs "."product_delivery_history" {
-  "id" int
-  "entry_id" int
+Table "afs"."product_delivery_history" {
+  "id" varchar(20)
+  "entry_id" varchar(20)
   "created_at" timestamp
   "product" varchar(10)
   "qty" float
@@ -121,50 +126,51 @@ Table "afs "."product_delivery_history" {
     (id, entry_id) [pk]
   }
 }
-Table "afs "."sc_payment_entry" {
-  "id" int [pk]
-  "scid" int
+
+Table "afs"."sc_payment_entry" {
+  "id" varchar(20) [pk]
+  "scid" varchar(20)
   "created_at" timestamp
   "amount" float
   "mode" varchar(10)
   "hisamount" float
   "curamount" float
   "remarks" varchar(100)
-  "created_by" varchar(10)
+  "uid" varchar(10)
 }
 
-Table "afs "."sd_payment_entry" {
-  "id" int [pk]
-  "sdid" int
+Table "afs"."sd_payment_entry" {
+  "id" varchar(20) [pk]
+  "sdid" varchar(20)
   "created_at" timestamp
   "amount" float
   "mode" varchar(10)
   "hisamount" float
   "curamount" float
   "remarks" varchar(100)
-  "created_by" varchar(10)
+  "uid" varchar(10)
 }
 
-Table "afs "."invoice_gst_main" {
-  "id" int [pk]
+Table "afs"."invoice_gst_main" {
+  "id" varchar(20) [pk]
   "invoice_no" varchar(30)
   "to" varchar(20)
-  "gst" varbinary
+  "gst" varchar(20)
   "inovice_date" date
   "gross_amount" float
   "cgst_amount" float
   "ssgst_amount" float
   "total_amount" float
   "remarks" varchar(100)
-  "created_at" timestamp
-  "created_by" varchar(10)
+  "created_at" timestamp [default: `now()`]
+  "uid" varchar(10)
   "paid" bool
 }
 
-Table "afs "."invoice_gst_history" {
-  "id" int
-  "entry_id" int
-  "created at" timestamp
+Table "afs"."invoice_gst_history" {
+  "id" varchar(20)
+  "entry_id" varchar(20)
+  "created_at" timestamp [default: `now()`]
   "product" varchar(255)
   "qty" float
   "HSN" varchar(8)
@@ -179,9 +185,9 @@ Table "afs "."invoice_gst_history" {
   }
 }
 
-Table "afs "."leadger_sc" {
-  "id" int [pk]
-  "name" varchar(50)
+Table "afs"."leadger_sc" {
+  "id" varchar(20) [pk]
+  "scid" varchar(20)
   "date" date
   "type" varchar(20)
   "current_amomount" float
@@ -189,13 +195,13 @@ Table "afs "."leadger_sc" {
   "mode" varchar(10)
   "remarks" varchar(50)
   "refno" varchar(50)
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
   "created by" varchar(20)
 }
 
-Table "afs "."leadger_sd" {
-  "id" int [pk]
-  "name" varchar(50)
+Table "afs"."leadger_sd" {
+  "id" varchar(20) [pk]
+  "sdid" varchar(20)
   "date" date
   "type" varchar(20)
   "current_amomount" float
@@ -203,48 +209,52 @@ Table "afs "."leadger_sd" {
   "mode" varchar(10)
   "remarks" varchar(50)
   "refno" varchar(50)
-  "created at" timestamp
+  "created_at" timestamp [default: `now()`]
   "created by" varchar(20)
 }
 
-Ref: "afs "."product_sub"."main_prod" < "afs "."product_main"."id"
+Ref:"afs"."appuser"."uid" < "afs"."scentity"."uid"
 
-Ref: "afs "."product_sub"."id" < "afs "."product_entry_history"."product"
+Ref:"afs"."appuser"."uid" < "afs"."sdentity"."uid"
 
-Ref: "afs "."product_entry_history"."entry_id" < "afs "."product_entry_main"."id"
+Ref:"afs"."appuser"."uid" < "afs"."product_entry_main"."uid"
 
-Ref: "afs "."scentity"."id" < "afs "."product_entry_main"."from"
+Ref:"afs"."appuser"."uid" < "afs"."sd_payment_entry"."uid"
 
-Ref: "afs "."appuser"."id" < "afs "."product_entry_main"."created_by"
+Ref:"afs"."appuser"."uid" < "afs"."product_delivary_main"."uid"
 
-Ref: "afs "."sdentity"."id" < "afs "."product_delivary_main"."to"
+Ref:"afs"."appuser"."uid" < "afs"."sc_payment_entry"."uid"
 
-Ref: "afs "."product_delivary_main"."id" < "afs "."product_delivery_history"."entry_id"
+Ref:"afs"."appuser"."uid" < "afs"."invoice_gst_main"."uid"
 
-Ref: "afs "."sc_payment_entry"."scid" < "afs "."scentity"."id"
+Ref:"afs"."appuser"."uid" < "afs"."leadger_sc"."created by"
 
-Ref: "afs "."sd_payment_entry"."id" < "afs "."sdentity"."id"
+Ref:"afs"."appuser"."uid" < "afs"."leadger_sd"."created by"
 
-Ref: "afs "."sd_payment_entry"."created_by" < "afs "."appuser"."id"
+Ref:"afs"."scentity"."id" < "afs"."product_entry_main"."from"
 
-Ref: "afs "."sc_payment_entry"."created_by" < "afs "."appuser"."id"
+Ref:"afs"."product_entry_main"."id" < "afs"."product_entry_history"."entry_id"
 
-Ref: "afs "."scentity"."created_by" < "afs "."appuser"."id"
+Ref:"afs"."product_delivary_main"."id" < "afs"."product_delivery_history"."entry_id"
 
-Ref: "afs "."sdentity"."created_by" < "afs "."appuser"."id"
+Ref:"afs"."sdentity"."id" < "afs"."product_delivary_main"."to"
 
-Ref: "afs "."invoice_gst_main"."id" < "afs "."invoice_gst_history"."entry_id"
+Ref:"afs"."scentity"."id" < "afs"."leadger_sc"."scid"
 
-Ref: "afs "."invoice_gst_main"."created_by" < "afs "."appuser"."id"
+Ref:"afs"."sdentity"."id" < "afs"."leadger_sd"."sdid"
 
-Ref: "afs "."invoice_gst_main"."to" < "afs "."sd_payment_entry"."id"
+Ref:"afs"."scentity"."id" < "afs"."sc_payment_entry"."scid"
 
-Ref: "afs "."invoice_gst_history"."product" < "afs "."product_sub"."id"
+Ref:"afs"."sdentity"."id" < "afs"."sd_payment_entry"."sdid"
 
-Ref: "afs "."leadger_sc"."name" < "afs "."sc_payment_entry"."id"
+Ref:"afs"."product_main"."id" < "afs"."product_sub"."main_prod"
 
-Ref: "afs "."leadger_sd"."name" < "afs "."sd_payment_entry"."id"
+Ref:"afs"."product_sub"."id" < "afs"."product_entry_history"."product"
 
-Ref: "afs "."leadger_sd"."created by" < "afs "."appuser"."id"
+Ref:"afs"."invoice_gst_main"."id" < "afs"."invoice_gst_history"."entry_id"
 
-Ref: "afs "."leadger_sc"."created by" < "afs "."appuser"."id"
+Ref:"afs"."product_sub"."id" < "afs"."invoice_gst_history"."product"
+
+Ref:"afs"."product_sub"."id" < "afs"."product_delivery_history"."product"
+
+Ref:"afs"."sdentity"."id" < "afs"."invoice_gst_main"."to"
