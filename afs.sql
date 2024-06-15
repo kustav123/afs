@@ -1,6 +1,6 @@
-CREATE SCHEMA `je`;
+CREATE SCHEMA `afs`;
 
-CREATE TABLE `je`.`scentity` (
+CREATE TABLE `afs`.`scentity` (
   `id` int PRIMARY KEY,
   `merchant_name` varchar(30),
   `mobile` varchar(15),
@@ -13,7 +13,7 @@ CREATE TABLE `je`.`scentity` (
   `created_by` varchar(10)
 );
 
-CREATE TABLE `je`.`sdentity` (
+CREATE TABLE `afs`.`sdentity` (
   `id` int PRIMARY KEY,
   `merchant_name` varchar(30),
   `mobile` varchar(15),
@@ -26,7 +26,7 @@ CREATE TABLE `je`.`sdentity` (
   `created_by` varchar(10)
 );
 
-CREATE TABLE `je`.`product_main` (
+CREATE TABLE `afs`.`product_main` (
   `id` int PRIMARY KEY,
   `name` varchar(50),
   `created at` timestamp,
@@ -35,7 +35,7 @@ CREATE TABLE `je`.`product_main` (
   `status` int
 );
 
-CREATE TABLE `je`.`product_sub` (
+CREATE TABLE `afs`.`product_sub` (
   `id` int PRIMARY KEY,
   `main_prod` varchar(5),
   `name` varchar(50),
@@ -44,7 +44,7 @@ CREATE TABLE `je`.`product_sub` (
   `status` int
 );
 
-CREATE TABLE `je`.`product_entry_main` (
+CREATE TABLE `afs`.`product_entry_main` (
   `id` int PRIMARY KEY,
   `chalan_no` varchar(255),
   `from` varchar(20),
@@ -56,7 +56,7 @@ CREATE TABLE `je`.`product_entry_main` (
   `created_by` varchar(10)
 );
 
-CREATE TABLE `je`.`product_entry_history` (
+CREATE TABLE `afs`.`product_entry_history` (
   `id` int,
   `entry_id` int,
   `created at` timestamp,
@@ -67,7 +67,7 @@ CREATE TABLE `je`.`product_entry_history` (
   PRIMARY KEY (`id`, `entry_id`)
 );
 
-CREATE TABLE `je`.`secuence` (
+CREATE TABLE `afs`.`secuence` (
   `id` int PRIMARY KEY,
   `type` varchar(20),
   `head` varchar(20),
@@ -77,7 +77,7 @@ CREATE TABLE `je`.`secuence` (
   `created at` timestamp
 );
 
-CREATE TABLE `je`.`appinfo` (
+CREATE TABLE `afs`.`appinfo` (
   `id` int,
   `name` varchar(50),
   `logo` varchar(100),
@@ -85,7 +85,7 @@ CREATE TABLE `je`.`appinfo` (
   `gstno` varchar(17)
 );
 
-CREATE TABLE `je`.`appuser` (
+CREATE TABLE `afs`.`appuser` (
   `id` int,
   `name` varchar(50),
   `mobile` varchar(15),
@@ -99,7 +99,7 @@ CREATE TABLE `je`.`appuser` (
   `lastlogin_from` varchar(30)
 );
 
-CREATE TABLE `je`.`product_delivary_main` (
+CREATE TABLE `afs`.`product_delivary_main` (
   `id` int PRIMARY KEY,
   `chalan_no` varchar(50),
   `to` varchar(20),
@@ -111,7 +111,7 @@ CREATE TABLE `je`.`product_delivary_main` (
   `created_by` varchar(10)
 );
 
-CREATE TABLE `je`.`product_delivery_history` (
+CREATE TABLE `afs`.`product_delivery_history` (
   `id` int,
   `entry_id` int,
   `created_at` timestamp,
@@ -122,7 +122,7 @@ CREATE TABLE `je`.`product_delivery_history` (
   PRIMARY KEY (`id`, `entry_id`)
 );
 
-CREATE TABLE `je`.`sc_payment_entry` (
+CREATE TABLE `afs`.`sc_payment_entry` (
   `id` int PRIMARY KEY,
   `scid` int,
   `created_at` timestamp,
@@ -134,7 +134,7 @@ CREATE TABLE `je`.`sc_payment_entry` (
   `created_by` varchar(10)
 );
 
-CREATE TABLE `je`.`sd_payment_entry` (
+CREATE TABLE `afs`.`sd_payment_entry` (
   `id` int PRIMARY KEY,
   `sdid` int,
   `created_at` timestamp,
@@ -146,7 +146,7 @@ CREATE TABLE `je`.`sd_payment_entry` (
   `created_by` varchar(10)
 );
 
-CREATE TABLE `je`.`invoice_gst_main` (
+CREATE TABLE `afs`.`invoice_gst_main` (
   `id` int PRIMARY KEY,
   `invoice_no` varchar(30),
   `to` varchar(20),
@@ -162,7 +162,7 @@ CREATE TABLE `je`.`invoice_gst_main` (
   `paid` bool
 );
 
-CREATE TABLE `je`.`invoice_gst_history` (
+CREATE TABLE `afs`.`invoice_gst_history` (
   `id` int,
   `entry_id` int,
   `created at` timestamp,
@@ -177,7 +177,7 @@ CREATE TABLE `je`.`invoice_gst_history` (
   PRIMARY KEY (`id`, `entry_id`)
 );
 
-CREATE TABLE `je`.`leadger_sc` (
+CREATE TABLE `afs`.`leadger_sc` (
   `id` int PRIMARY KEY,
   `name` varchar(50),
   `date` date,
@@ -191,7 +191,7 @@ CREATE TABLE `je`.`leadger_sc` (
   `created by` varchar(20)
 );
 
-CREATE TABLE `je`.`leadger_sd` (
+CREATE TABLE `afs`.`leadger_sd` (
   `id` int PRIMARY KEY,
   `name` varchar(50),
   `date` date,
@@ -205,44 +205,44 @@ CREATE TABLE `je`.`leadger_sd` (
   `created by` varchar(20)
 );
 
-ALTER TABLE `je`.`product_main` ADD FOREIGN KEY (`id`) REFERENCES `je`.`product_sub` (`main_prod`);
+ALTER TABLE `afs`.`product_main` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`product_sub` (`main_prod`);
 
-ALTER TABLE `je`.`product_entry_history` ADD FOREIGN KEY (`product`) REFERENCES `je`.`product_sub` (`id`);
+ALTER TABLE `afs`.`product_entry_history` ADD FOREIGN KEY (`product`) REFERENCES `afs`.`product_sub` (`id`);
 
-ALTER TABLE `je`.`product_entry_main` ADD FOREIGN KEY (`id`) REFERENCES `je`.`product_entry_history` (`entry_id`);
+ALTER TABLE `afs`.`product_entry_main` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`product_entry_history` (`entry_id`);
 
-ALTER TABLE `je`.`product_entry_main` ADD FOREIGN KEY (`from`) REFERENCES `je`.`scentity` (`id`);
+ALTER TABLE `afs`.`product_entry_main` ADD FOREIGN KEY (`from`) REFERENCES `afs`.`scentity` (`id`);
 
-ALTER TABLE `je`.`product_entry_main` ADD FOREIGN KEY (`created_by`) REFERENCES `je`.`appuser` (`id`);
+ALTER TABLE `afs`.`product_entry_main` ADD FOREIGN KEY (`created_by`) REFERENCES `afs`.`appuser` (`id`);
 
-ALTER TABLE `je`.`product_delivary_main` ADD FOREIGN KEY (`to`) REFERENCES `je`.`sdentity` (`id`);
+ALTER TABLE `afs`.`product_delivary_main` ADD FOREIGN KEY (`to`) REFERENCES `afs`.`sdentity` (`id`);
 
-ALTER TABLE `je`.`product_delivery_history` ADD FOREIGN KEY (`entry_id`) REFERENCES `je`.`product_delivary_main` (`id`);
+ALTER TABLE `afs`.`product_delivery_history` ADD FOREIGN KEY (`entry_id`) REFERENCES `afs`.`product_delivary_main` (`id`);
 
-ALTER TABLE `je`.`scentity` ADD FOREIGN KEY (`id`) REFERENCES `je`.`sc_payment_entry` (`scid`);
+ALTER TABLE `afs`.`scentity` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sc_payment_entry` (`scid`);
 
-ALTER TABLE `je`.`sdentity` ADD FOREIGN KEY (`id`) REFERENCES `je`.`sd_payment_entry` (`id`);
+ALTER TABLE `afs`.`sdentity` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sd_payment_entry` (`id`);
 
-ALTER TABLE `je`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `je`.`sd_payment_entry` (`created_by`);
+ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sd_payment_entry` (`created_by`);
 
-ALTER TABLE `je`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `je`.`sc_payment_entry` (`created_by`);
+ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sc_payment_entry` (`created_by`);
 
-ALTER TABLE `je`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `je`.`scentity` (`created_by`);
+ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`scentity` (`created_by`);
 
-ALTER TABLE `je`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `je`.`sdentity` (`created_by`);
+ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`sdentity` (`created_by`);
 
-ALTER TABLE `je`.`invoice_gst_history` ADD FOREIGN KEY (`entry_id`) REFERENCES `je`.`invoice_gst_main` (`id`);
+ALTER TABLE `afs`.`invoice_gst_history` ADD FOREIGN KEY (`entry_id`) REFERENCES `afs`.`invoice_gst_main` (`id`);
 
-ALTER TABLE `je`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `je`.`invoice_gst_main` (`created_by`);
+ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`invoice_gst_main` (`created_by`);
 
-ALTER TABLE `je`.`sd_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `je`.`invoice_gst_main` (`to`);
+ALTER TABLE `afs`.`sd_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`invoice_gst_main` (`to`);
 
-ALTER TABLE `je`.`product_sub` ADD FOREIGN KEY (`id`) REFERENCES `je`.`invoice_gst_history` (`product`);
+ALTER TABLE `afs`.`product_sub` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`invoice_gst_history` (`product`);
 
-ALTER TABLE `je`.`sc_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `je`.`leadger_sc` (`name`);
+ALTER TABLE `afs`.`sc_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sc` (`name`);
 
-ALTER TABLE `je`.`sd_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `je`.`leadger_sd` (`name`);
+ALTER TABLE `afs`.`sd_payment_entry` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sd` (`name`);
 
-ALTER TABLE `je`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `je`.`leadger_sd` (`created by`);
+ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sd` (`created by`);
 
-ALTER TABLE `je`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `je`.`leadger_sc` (`created by`);
+ALTER TABLE `afs`.`appuser` ADD FOREIGN KEY (`id`) REFERENCES `afs`.`leadger_sc` (`created by`);

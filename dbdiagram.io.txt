@@ -1,4 +1,4 @@
-Table "je"."scentity" {
+Table "afs "."scentity" {
   "id" int [pk]
   "merchant_name" varchar(30)
   "mobile" varchar(15)
@@ -11,7 +11,7 @@ Table "je"."scentity" {
   "created_by" varchar(10)
 }
 
-Table "je"."sdentity" {
+Table "afs "."sdentity" {
   "id" int [pk]
   "merchant_name" varchar(30)
   "mobile" varchar(15)
@@ -24,7 +24,7 @@ Table "je"."sdentity" {
   "gst" varchar(17)
   "created_by" varchar(10)
 }
-Table "je"."product_main" {
+Table "afs "."product_main" {
   "id" int [pk]
   "name" varchar(50)
   "created at" timestamp
@@ -32,7 +32,7 @@ Table "je"."product_main" {
   "current_stock" float
   "status" int
 }
-Table "je"."product_sub" {
+Table "afs "."product_sub" {
   "id" int [pk]
   "main_prod" varchar(5)
   "name" varchar(50)
@@ -40,7 +40,7 @@ Table "je"."product_sub" {
   "current_stock" float
   "status" int
 }
-Table "je"."product_entry_main" {
+Table "afs "."product_entry_main" {
   "id" int [pk]
   "chalan_no" varchar
   "from" varchar(20)
@@ -52,7 +52,7 @@ Table "je"."product_entry_main" {
   "created_by" varchar(10)
 }
 
-Table "je"."product_entry_history" {
+Table "afs "."product_entry_history" {
   "id" int
   "entry_id" int
   "created at" timestamp
@@ -65,7 +65,7 @@ Table "je"."product_entry_history" {
     (id, entry_id) [pk]
   }
 }
-Table "je"."secuence" {
+Table "afs "."secuence" {
   "id" int [pk]
   "type" varchar(20)
   "head" varchar(20)
@@ -75,7 +75,7 @@ Table "je"."secuence" {
   "created at" timestamp
 }
 
-Table "je"."appinfo" {
+Table "afs "."appinfo" {
   "id" int
   "name" varchar(50)
   "logo" varchar(100)
@@ -83,7 +83,7 @@ Table "je"."appinfo" {
   "gstno" varchar(17)
 }
 
-Table "je"."appuser" {
+Table "afs "."appuser" {
   "id" int
   "name" varchar(50)
   "mobile" varchar(15)
@@ -96,7 +96,7 @@ Table "je"."appuser" {
   "lastlogin_time" timestamp
   "lastlogin_from" varchar(30)
 }
-Table "je"."product_delivary_main" {
+Table "afs "."product_delivary_main" {
   "id" int [pk]
   "chalan_no" varchar(50)
   "to" varchar(20)
@@ -108,7 +108,7 @@ Table "je"."product_delivary_main" {
   "created_by" varchar(10)
 }
 
-Table "je"."product_delivery_history" {
+Table "afs "."product_delivery_history" {
   "id" int
   "entry_id" int
   "created_at" timestamp
@@ -121,7 +121,7 @@ Table "je"."product_delivery_history" {
     (id, entry_id) [pk]
   }
 }
-Table "je"."sc_payment_entry" {
+Table "afs "."sc_payment_entry" {
   "id" int [pk]
   "scid" int
   "created_at" timestamp
@@ -133,7 +133,7 @@ Table "je"."sc_payment_entry" {
   "created_by" varchar(10)
 }
 
-Table "je"."sd_payment_entry" {
+Table "afs "."sd_payment_entry" {
   "id" int [pk]
   "sdid" int
   "created_at" timestamp
@@ -145,7 +145,7 @@ Table "je"."sd_payment_entry" {
   "created_by" varchar(10)
 }
 
-Table "je"."invoice_gst_main" {
+Table "afs "."invoice_gst_main" {
   "id" int [pk]
   "invoice_no" varchar(30)
   "to" varchar(20)
@@ -161,7 +161,7 @@ Table "je"."invoice_gst_main" {
   "paid" bool
 }
 
-Table "je"."invoice_gst_history" {
+Table "afs "."invoice_gst_history" {
   "id" int
   "entry_id" int
   "created at" timestamp
@@ -179,7 +179,7 @@ Table "je"."invoice_gst_history" {
   }
 }
 
-Table "je"."leadger_sc" {
+Table "afs "."leadger_sc" {
   "id" int [pk]
   "name" varchar(50)
   "date" date
@@ -193,7 +193,7 @@ Table "je"."leadger_sc" {
   "created by" varchar(20)
 }
 
-Table "je"."leadger_sd" {
+Table "afs "."leadger_sd" {
   "id" int [pk]
   "name" varchar(50)
   "date" date
@@ -207,44 +207,44 @@ Table "je"."leadger_sd" {
   "created by" varchar(20)
 }
 
-Ref: "je"."product_sub"."main_prod" < "je"."product_main"."id"
+Ref: "afs "."product_sub"."main_prod" < "afs "."product_main"."id"
 
-Ref: "je"."product_sub"."id" < "je"."product_entry_history"."product"
+Ref: "afs "."product_sub"."id" < "afs "."product_entry_history"."product"
 
-Ref: "je"."product_entry_history"."entry_id" < "je"."product_entry_main"."id"
+Ref: "afs "."product_entry_history"."entry_id" < "afs "."product_entry_main"."id"
 
-Ref: "je"."scentity"."id" < "je"."product_entry_main"."from"
+Ref: "afs "."scentity"."id" < "afs "."product_entry_main"."from"
 
-Ref: "je"."appuser"."id" < "je"."product_entry_main"."created_by"
+Ref: "afs "."appuser"."id" < "afs "."product_entry_main"."created_by"
 
-Ref: "je"."sdentity"."id" < "je"."product_delivary_main"."to"
+Ref: "afs "."sdentity"."id" < "afs "."product_delivary_main"."to"
 
-Ref: "je"."product_delivary_main"."id" < "je"."product_delivery_history"."entry_id"
+Ref: "afs "."product_delivary_main"."id" < "afs "."product_delivery_history"."entry_id"
 
-Ref: "je"."sc_payment_entry"."scid" < "je"."scentity"."id"
+Ref: "afs "."sc_payment_entry"."scid" < "afs "."scentity"."id"
 
-Ref: "je"."sd_payment_entry"."id" < "je"."sdentity"."id"
+Ref: "afs "."sd_payment_entry"."id" < "afs "."sdentity"."id"
 
-Ref: "je"."sd_payment_entry"."created_by" < "je"."appuser"."id"
+Ref: "afs "."sd_payment_entry"."created_by" < "afs "."appuser"."id"
 
-Ref: "je"."sc_payment_entry"."created_by" < "je"."appuser"."id"
+Ref: "afs "."sc_payment_entry"."created_by" < "afs "."appuser"."id"
 
-Ref: "je"."scentity"."created_by" < "je"."appuser"."id"
+Ref: "afs "."scentity"."created_by" < "afs "."appuser"."id"
 
-Ref: "je"."sdentity"."created_by" < "je"."appuser"."id"
+Ref: "afs "."sdentity"."created_by" < "afs "."appuser"."id"
 
-Ref: "je"."invoice_gst_main"."id" < "je"."invoice_gst_history"."entry_id"
+Ref: "afs "."invoice_gst_main"."id" < "afs "."invoice_gst_history"."entry_id"
 
-Ref: "je"."invoice_gst_main"."created_by" < "je"."appuser"."id"
+Ref: "afs "."invoice_gst_main"."created_by" < "afs "."appuser"."id"
 
-Ref: "je"."invoice_gst_main"."to" < "je"."sd_payment_entry"."id"
+Ref: "afs "."invoice_gst_main"."to" < "afs "."sd_payment_entry"."id"
 
-Ref: "je"."invoice_gst_history"."product" < "je"."product_sub"."id"
+Ref: "afs "."invoice_gst_history"."product" < "afs "."product_sub"."id"
 
-Ref: "je"."leadger_sc"."name" < "je"."sc_payment_entry"."id"
+Ref: "afs "."leadger_sc"."name" < "afs "."sc_payment_entry"."id"
 
-Ref: "je"."leadger_sd"."name" < "je"."sd_payment_entry"."id"
+Ref: "afs "."leadger_sd"."name" < "afs "."sd_payment_entry"."id"
 
-Ref: "je"."leadger_sd"."created by" < "je"."appuser"."id"
+Ref: "afs "."leadger_sd"."created by" < "afs "."appuser"."id"
 
-Ref: "je"."leadger_sc"."created by" < "je"."appuser"."id"
+Ref: "afs "."leadger_sc"."created by" < "afs "."appuser"."id"
